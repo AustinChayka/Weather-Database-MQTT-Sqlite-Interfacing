@@ -21,12 +21,16 @@ dbf.print_db_definition(cursor, 'readings')
 for row in cursor.fetchall():
     print(row)
 
-dbf.make_entry(cursor, 67.0, .5, 122.0, .03)
+data = dbf.parse_mqtt_payload('b|1,2,3,4,5|')
+
+dbf.make_entry(cursor, data[0], data[1], data[2], data[3])
 
 dbf.print_db_entries(cursor, 'readings')
+
+print()
 
 conn.commit()
 
 conn.close()
 
-print('\ndone')
+print('done')

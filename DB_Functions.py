@@ -33,3 +33,12 @@ def print_db_entries(cursor, table_name):
     print('')
     for entry in cursor.fetchall():
         print(entry)
+
+def parse_mqtt_payload(payload):
+    assert isinstance(payload, str), 'parse_mqtt_payload(), payload is not of type string'
+    payload = payload[2:-1]
+    output = payload.split(',')
+    assert len(output) <= 5, 'parse_mqtt_payload(), payload has too many entries'
+    for i in range(len(output)):
+        output[i] = float(output[i])
+    return output
