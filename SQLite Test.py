@@ -18,9 +18,6 @@ cursor.execute('''
 
 dbf.print_db_definition(cursor, 'readings')
 
-for row in cursor.fetchall():
-    print(row)
-
 data = dbf.parse_mqtt_payload('b|1,2,3,4,5|')
 
 dbf.make_entry(cursor, data[0], data[1], data[2], data[3])
